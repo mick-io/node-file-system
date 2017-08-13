@@ -40,6 +40,7 @@ function dirWordCount (dirPath, wordsObj, fileCount) {
                     let output = util.rmBraces(JSON.stringify(util.keysInArr(wordsObj, words), null, 4));
 
                     console.log(`File ${fileCount}\n${item}:${output}`);
+
                     util.setKeysToZero(wordsObj);
                     fileCount++;
 
