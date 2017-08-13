@@ -1,4 +1,4 @@
-# Node file System #/
+# Node file System #
 
 Using the techniques covered so far in the backend module, create a node.js application that will read the contents of a directory, and output some information about contents of the files in that directory.
 
