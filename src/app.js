@@ -16,14 +16,15 @@ const foods = {
 };
 
 /* Used to keep track of the number of files in a dir. Should be set to 0 */
-let fileCount = 0;
 
 /**
  * Logs out the occurrence of an objects keys in a directory.
  * @param {string} dirPath: directory path relative to function evocation.
  * @param {object} wordsObj: keys will be iterated over and numerical values to be incremented.
+ * @param {number} fileCount: (optional): Where index that displays next to the `File ${num}` output will start. Default is 1
  */
-function dirWordCount (dirPath, wordsObj) {
+function dirWordCount (dirPath, wordsObj, fileCount) {
+    if (!fileCount) { fileCount = 1; }
 
     fs.readdir(dirPath, (error, files) => {
         if (error) { throw new Error(error); }
@@ -37,13 +38,13 @@ function dirWordCount (dirPath, wordsObj) {
                 if (stat.isFile()) {
                     let words = fs.readFileSync(itemPath, 'utf-8').split(' ');
                     let output = util.rmBraces(JSON.stringify(util.keysInArr(wordsObj, words), null, 4));
-                    fileCount++;
 
                     console.log(`File ${fileCount}\n${item}:${output}`);
-
                     util.setKeysToZero(wordsObj);
+                    fileCount++;
+
                 } else if (stat.isDirectory()) {
-                    dirWordCount(itemPath, wordsObj);
+                    dirWordCount(itemPath, wordsObj, fileCount);
                 }
             });
         }
