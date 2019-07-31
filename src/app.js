@@ -23,27 +23,34 @@ const foods = {
  * @param {object} wordsObj: keys will be iterated over and numerical values to be incremented.
  * @param {number} fileCount: (optional): Where index that displays next to the `File ${num}` output will start. Default is 1
  */
-function dirWordCount (dirPath, wordsObj, fileCount) {
-    if (!fileCount) { fileCount = 1; }
+function dirWordCount(dirPath, wordsObj, fileCount) {
+    if (!fileCount) {
+        fileCount = 1;
+    }
 
     fs.readdir(dirPath, (error, files) => {
-        if (error) { throw new Error(error); }
+        if (error) {
+            throw new Error(error);
+        }
 
         for (let item of files) {
             let itemPath = `${dirPath}/${item}`;
 
             fs.stat(itemPath, (error, stat) => {
-                if (error) { throw new Error(error); }
+                if (error) {
+                    throw new Error(error);
+                }
 
                 if (stat.isFile()) {
                     let words = fs.readFileSync(itemPath, 'utf-8').split(' ');
-                    let output = util.rmBraces(JSON.stringify(util.keysInArr(wordsObj, words), null, 4));
+                    let output = util.rmBraces(
+                        JSON.stringify(util.keysInArr(wordsObj, words), null, 4)
+                    );
 
-                    console.log(`File ${fileCount}\n${item}:${output}`);
+                    console.log(`File ${fileCount}\n${item}:${output}`); // eslint-disable-line no-console
 
                     util.setKeysToZero(wordsObj);
                     fileCount++;
-
                 } else if (stat.isDirectory()) {
                     dirWordCount(itemPath, wordsObj, fileCount);
                 }

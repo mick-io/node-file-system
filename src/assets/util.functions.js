@@ -3,7 +3,7 @@
  * @param {object} obj with numerical values
  * @param {array} arr
  */
-exports.keysInArr = function (obj, arr) {
+exports.keysInArr = function(obj, arr) {
     for (let key in obj) {
         for (let element of arr) {
             if (element === key) {
@@ -18,7 +18,7 @@ exports.keysInArr = function (obj, arr) {
  *  Set's the values within an object to 0;
  * @param {object} object with numerical values.
  */
-exports.setKeysToZero = function (obj) {
+exports.setKeysToZero = function(obj) {
     for (let key in obj) {
         obj[key] = 0;
     }
@@ -29,7 +29,7 @@ exports.setKeysToZero = function (obj) {
  * Use to remove curly braces from a stringified JS object.
  * @param {JSON.stringify(obj)} A stringified JavaScript object
  */
-exports.rmBraces = function (jsonStr) {
+exports.rmBraces = function(jsonStr) {
     jsonStr = jsonStr.split('');
     jsonStr.shift();
     jsonStr.pop();
